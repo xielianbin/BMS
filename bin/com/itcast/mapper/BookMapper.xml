@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itcast.mapper.BookMapper">
+	<resultMap type="com.itcast.pojo.Book" id="resultMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="author" column="author" />
+		<result property="authors" column="authors" />
+		<result property="publish" column="publish" />
+		<result property="bookclass" column="bookclass" />
+		<result property="time" column="time" />
+		<result property="isbn" column="isbn" />
+		<result property="price" column="price" />
+		<result property="content" column="content" />
+	</resultMap>
+	<select id="findAllBook" resultMap="resultMap">
+		select * from book
+	</select>
+	
+	<select id="findBook" resultType="com.itcast.pojo.Book"
+		parameterType="Integer">
+		select * from book where id=#{id}
+	</select>
+	<delete id="deleteBook" parameterType="Integer">
+		delete from book where id=#{id}
+	</delete>
+	<update id="updateBook" parameterType="com.itcast.pojo.Book">
+		update book set
+		name=#{name},author=#{author},authors=#{authors},publish=#{publish},bookclass=#{bookclass},time=#{time},isbn=#{isbn},price=#{price},content=#{content}
+		where id=#{id}
+	</update>
+	<insert id="insertBook" parameterType="com.itcast.pojo.Book">
+		insert into book
+		values(#{id},#{name},#{author},#{authors},#{publish},#{bookclass},#{time},#{isbn},#{price},#{content})
+	</insert>
+</mapper>
